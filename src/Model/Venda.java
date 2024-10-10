@@ -4,6 +4,9 @@
  */
 package Model;
 
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  *
  * @author Caua
@@ -14,7 +17,7 @@ public class Venda {
     private Viagem viagem;
     private List<Assento> assentosVendidos;
     private double valorTotal;
-    private localDate dataVenda;
+    private LocalDate dataVenda;
     private String formaPagamento;
     private String status;
 }

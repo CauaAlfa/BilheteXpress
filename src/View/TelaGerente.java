@@ -16,6 +16,10 @@ public class TelaGerente extends javax.swing.JPanel {
     public TelaGerente() {
         initComponents();
     }
+    
+    public static void main(String[] args) {
+        new TelaGerente().setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
