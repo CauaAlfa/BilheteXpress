@@ -27,6 +27,14 @@ public class Cliente {
         this.historicoViagens = historicoViagens;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", BI=" + BI + ", telefone=" + telefone + ", historicoViagens=" + historicoViagens + '}';
+    }
+
+    public Cliente() {
+    }
+
     public int getId() {
         return id;
     }
