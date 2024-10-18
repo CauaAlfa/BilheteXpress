@@ -7,6 +7,9 @@ package View;
 
 import java.awt.event.KeyEvent;
 import Controller.EmailValidator;
+import DAO.ConexaoBD;
+import DAO.UsuarioDAO;
+import Model.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
@@ -23,7 +26,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
-        txtusername.setBackground(new java.awt.Color(0, 0, 0, 1));
+        txtEmail.setBackground(new java.awt.Color(0, 0, 0, 1));
         txtpassword.setBackground(new java.awt.Color(0, 0, 0, 1));
     }
 
@@ -44,7 +47,7 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtusername = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
@@ -107,15 +110,15 @@ public class login extends javax.swing.JFrame {
         jLabel5.setText("Username");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 341, -1));
 
-        txtusername.setFont(txtusername.getFont().deriveFont(txtusername.getFont().getSize()+2f));
-        txtusername.setForeground(new java.awt.Color(255, 255, 255));
-        txtusername.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
-        txtusername.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.setFont(txtEmail.getFont().deriveFont(txtEmail.getFont().getSize()+2f));
+        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
+        txtEmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtusernameActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
-        jPanel2.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 290, 30));
+        jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 290, 30));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_user_20px_1.png"))); // NOI18N
@@ -163,6 +166,11 @@ public class login extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(102, 153, 255));
         jButton1.setText("LOGIN");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 220, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 420, 440));
@@ -204,21 +212,45 @@ public class login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
             EmailValidator emailValidator = new EmailValidator();
-                String email = txtusername.getText();
+                String email = txtEmail.getText();
                 boolean isValid = emailValidator.isEmailValid(email);
                 
                 if (isValid) {
-                    txtusername.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+                    txtEmail.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                     txtpassword.requestFocus();
                 } else {
-                    txtusername.setBorder(BorderFactory.createLineBorder(Color.RED));
+                    txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
                     //emailValidator.showError("O e-mail não é válido.");
-                    txtusername.requestFocus();
+                    txtEmail.requestFocus();
                 }
             
-    }//GEN-LAST:event_txtusernameActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String email = txtEmail.getText();
+        String senha = new String(txtpassword.getPassword());
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.login(email, senha);
+
+        if (usuario != null) {
+            System.out.println("Login bem-sucedido!");
+
+            // Redireciona com base no cargo
+            String cargo = usuario.getCargo();
+            if ("Administrador".equals(cargo)) {
+                new TelaAdmin().setVisible(true);
+            } else if ("Gerente de Venda".equals(cargo)) {
+             //   new TelaGerenteVenda().setVisible(true);
+            } else if ("Atendente".equals(cargo)) {
+             //   new TelaAtendente().setVisible(true);
+            }
+        } else {
+            System.out.println("Login falhou. Verifique suas credenciais.");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
    
@@ -273,7 +305,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel show;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtpassword;
-    private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 }

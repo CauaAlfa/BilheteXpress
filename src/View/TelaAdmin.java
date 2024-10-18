@@ -6,8 +6,13 @@ package View;
 
 import java.sql.*;
 import Controller.EmailValidator;
-import com.sun.jdi.connect.spi.Connection;
+import DAO.UsuarioDAO;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.awt.Color;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -25,23 +30,19 @@ public class TelaAdmin extends javax.swing.JFrame {
         initComponents();
     }
    
-
-   
         private static final String URL = "jdbc:mysql://localhost:3306/bilhetexpress";
         private static final String USER = "root";
         private static final String PASSWORD = "";
 
-        
-
         public static Connection conectar() {
-            Connection con = null;
-            try {
-                con = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("Conexão estabelecida com sucesso!");
-            } catch (SQLException e) {
-                System.out.println("Erro ao conectar com o banco de dados: " + e.getMessage());
-            }
-            return con;
+        Connection con = null;
+        try {
+            con = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Conexão estabelecida com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao conectar com o banco de dados: " + e.getMessage());
+        }
+          return con;
         }
 
     
@@ -76,7 +77,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         p2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         p3 = new javax.swing.JPanel();
@@ -256,10 +257,10 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Senha");
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Imagens/icons8_save_close_50px_2.png"))); // NOI18N
-        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel18MouseClicked(evt);
+        jButton3.setText("CADASTRAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -290,8 +291,8 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(194, 194, 194))))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115))))
         );
         p1Layout.setVerticalGroup(
             p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,9 +316,9 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtapelido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jLabel18)
-                .addGap(55, 55, 55))
+                .addGap(53, 53, 53)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         tp.addTab("tab2", p1);
@@ -565,25 +566,17 @@ public class TelaAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtnomeActionPerformed
 
-    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
-        String apelido = txtapelido.getText();        
-    String nome = txtnome.getText();        
-    String email = txtemail.getText();        
-    String senha = txtsenha.getText();        
-    String cargo = comboBox.getSelectedItem().toString();  // Assuming you want to retrieve the selected item from the comboBox
-    try {
-        // Assuming 'con' is your Connection object already set up elsewhere
-        pst = con.prepareStatement("INSERT INTO users (apelido,nome,email,senha,cargo) VALUES (?, ?, ?, ?, ?)");
-        pst.setString(1, apelido);
-        pst.setString(2, nome);
-        pst.setString(3, email);
-        pst.setString(4, senha);
-        pst.setString(5, cargo);
-        pst.executeUpdate();  // Execute the update
-    } catch (SQLException e) {
-        e.printStackTrace();  // Handle the SQL exception properly
-    }
-    }//GEN-LAST:event_jLabel18MouseClicked
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    
+    String apelido = txtapelido.getText();
+    String nome = txtnome.getText();
+    String email = txtemail.getText();
+    String senha = new String(txtsenha.getText());
+    String cargo = comboBox.getSelectedItem().toString();
+
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    usuarioDAO.cadastrarUsuario(apelido, nome, email, senha, cargo);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -624,6 +617,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -632,7 +626,6 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
