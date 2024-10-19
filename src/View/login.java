@@ -27,7 +27,7 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         txtEmail.setBackground(new java.awt.Color(0, 0, 0, 1));
-        txtpassword.setBackground(new java.awt.Color(0, 0, 0, 1));
+        pfpassword.setBackground(new java.awt.Color(0, 0, 0, 1));
     }
 
     /**
@@ -50,7 +50,7 @@ public class login extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtpassword = new javax.swing.JPasswordField();
+        pfpassword = new javax.swing.JPasswordField();
         disable = new javax.swing.JLabel();
         show = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -129,11 +129,11 @@ public class login extends javax.swing.JFrame {
         jLabel8.setText("Password");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 341, -1));
 
-        txtpassword.setFont(txtpassword.getFont().deriveFont(txtpassword.getFont().getSize()+2f));
-        txtpassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtpassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
-        txtpassword.setCaretColor(new java.awt.Color(255, 255, 255));
-        jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 30));
+        pfpassword.setFont(pfpassword.getFont().deriveFont(pfpassword.getFont().getSize()+2f));
+        pfpassword.setForeground(new java.awt.Color(255, 255, 255));
+        pfpassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        pfpassword.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel2.add(pfpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 30));
 
         disable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         disable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_invisible_20px_1.png"))); // NOI18N
@@ -184,7 +184,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
-        txtpassword.setEchoChar((char) 0);
+        pfpassword.setEchoChar((char) 0);
         disable.setVisible(false);
         disable.setEnabled(false);
         show.setEnabled(true);
@@ -192,7 +192,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_disableMouseClicked
 
     private void showMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMouseClicked
-        txtpassword.setEchoChar((char) 8226);
+        pfpassword.setEchoChar((char) 8226);
         disable.setVisible(true);
         disable.setEnabled(true);
         show.setEnabled(false);
@@ -219,7 +219,7 @@ public class login extends javax.swing.JFrame {
                 
                 if (isValid) {
                     txtEmail.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-                    txtpassword.requestFocus();
+                    pfpassword.requestFocus();
                 } else {
                     txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
                     //emailValidator.showError("O e-mail não é válido.");
@@ -230,7 +230,7 @@ public class login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String email = txtEmail.getText();
-        String senha = new String(txtpassword.getPassword());
+        String senha = new String (pfpassword.getPassword());
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = usuarioDAO.login(email, senha);
@@ -304,8 +304,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField pfpassword;
     private javax.swing.JLabel show;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }

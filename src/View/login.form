@@ -221,11 +221,11 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtpassword">
+        <Component class="javax.swing.JPasswordField" name="pfpassword">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
               <FontInfo relative="true">
-                <Font component="txtpassword" property="font" relativeSize="true" size="2"/>
+                <Font component="pfpassword" property="font" relativeSize="true" size="2"/>
               </FontInfo>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

@@ -29,6 +29,10 @@ public class Usuario {
         this.status = status;
     }
 
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getId() {
         return id;
     }
