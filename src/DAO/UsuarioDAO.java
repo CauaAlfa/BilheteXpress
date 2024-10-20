@@ -92,5 +92,24 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+    
+    //Metodo para actualizar dados dos usuarios
+    public void atualizarUsuario(Usuario usuario) {
+     Connection con = ConexaoBD.conectar();
+
+     try {
+         PreparedStatement pst = con.prepareStatement("UPDATE users SET email = ?, senha = ?, cargo = ?, status = ? WHERE id = ?");
+         pst.setString(1, usuario.getEmail());
+         pst.setString(2, usuario.getSenha());
+         pst.setString(3, usuario.getCargo());
+         pst.setBoolean(4, usuario.isStatus());
+         pst.setInt(5, usuario.getId());
+         pst.executeUpdate();
+         System.out.println("Usuário atualizado com sucesso!");
+     } catch (SQLException e) {
+         System.out.println("Erro ao atualizar usuário: " + e.getMessage());
+     }
+    }
+
 }
 
