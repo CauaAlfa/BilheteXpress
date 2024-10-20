@@ -18,6 +18,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -66,8 +74,9 @@ public class TelaAdmin extends javax.swing.JFrame {
                     usuario.getCargo(), 
                     usuario.isStatus()
                 });
-            }
         }
+}
+
 
     
     
@@ -95,19 +104,20 @@ public class TelaAdmin extends javax.swing.JFrame {
         txtnome = new javax.swing.JTextField();
         txtapelido = new javax.swing.JTextField();
         txtemail = new javax.swing.JTextField();
-        txtsenha = new javax.swing.JTextField();
         comboBox = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        pfsenha = new javax.swing.JPasswordField();
         p2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         p3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaUsuarios = new javax.swing.JTable();
+        atualizarTabela = new javax.swing.JButton();
         p4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -308,7 +318,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtemail, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                            .addComponent(txtsenha))))
+                            .addComponent(pfsenha))))
                 .addContainerGap(267, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -339,7 +349,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtapelido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
@@ -401,7 +411,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -412,7 +422,19 @@ public class TelaAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelaUsuarios);
+
+        atualizarTabela.setText("ATUALIZAR DADOS");
+        atualizarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarTabelaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p3Layout = new javax.swing.GroupLayout(p3);
         p3.setLayout(p3Layout);
@@ -423,7 +445,9 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(p3Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(p3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(atualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 65, Short.MAX_VALUE))
         );
         p3Layout.setVerticalGroup(
@@ -432,7 +456,9 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 114, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(atualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         tp.addTab("tab4", p3);
@@ -595,7 +621,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     String apelido = txtapelido.getText();
     String nome = txtnome.getText();
     String email = txtemail.getText();
-    String senha = new String(txtsenha.getText());
+    String senha = new String(pfsenha.getPassword());
     String cargo = comboBox.getSelectedItem().toString();
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -603,6 +629,56 @@ public class TelaAdmin extends javax.swing.JFrame {
     
     atualizarTabela();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void atualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarTabelaActionPerformed
+        int selectedRow = tabelaUsuarios.getSelectedRow();
+        if (selectedRow != -1) {
+            int id = (int) tabelaUsuarios.getValueAt(selectedRow, 0);
+            String email = (String) tabelaUsuarios.getValueAt(selectedRow, 3);
+            String cargo = (String) tabelaUsuarios.getValueAt(selectedRow, 4);
+            boolean status = (boolean) tabelaUsuarios.getValueAt(selectedRow, 5);
+
+            JTextField txtEmail = new JTextField(email);
+            JPasswordField txtSenha = new JPasswordField();
+            JComboBox<String> comboBoxCargo = new JComboBox<>(new String[]{"Administrador", "Gerente de Venda", "Atendente"});
+            comboBoxCargo.setSelectedItem(cargo);
+            JCheckBox checkboxStatus = new JCheckBox("Status", status);
+
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            panel.add(new JLabel("Email:"));
+            panel.add(txtEmail);
+            panel.add(new JLabel("Senha:"));
+            panel.add(txtSenha);
+            panel.add(new JLabel("Cargo:"));
+            panel.add(comboBoxCargo);
+            panel.add(checkboxStatus);
+
+            int result = JOptionPane.showConfirmDialog(null, panel, "Atualizar Usuário", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (result == JOptionPane.OK_OPTION) {
+                String novoEmail = txtEmail.getText();
+                String novaSenha = new String(txtSenha.getPassword());
+                String novoCargo = (String) comboBoxCargo.getSelectedItem();
+                boolean novoStatus = checkboxStatus.isSelected();
+
+                Usuario usuario = new Usuario();
+                usuario.setId(id);
+                usuario.setEmail(novoEmail);
+                usuario.setSenha(novaSenha);
+                usuario.setCargo(novoCargo);
+                usuario.setStatus(novoStatus);
+
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuarioDAO.atualizarUsuario(usuario);
+
+                atualizarTabela();  // Atualiza a tabela após a atualização do usuário
+            }
+        }
+    }//GEN-LAST:event_atualizarTabelaActionPerformed
+
+    private void tabelaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaUsuariosMouseClicked
+        
+    }//GEN-LAST:event_tabelaUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -640,6 +716,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atualizarTabela;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -670,11 +747,11 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel p4;
     private javax.swing.JPanel p5;
     private javax.swing.JPanel pMenu;
+    private javax.swing.JPasswordField pfsenha;
     private javax.swing.JTable tabelaUsuarios;
     private javax.swing.JTabbedPane tp;
     private javax.swing.JTextField txtapelido;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtnome;
-    private javax.swing.JTextField txtsenha;
     // End of variables declaration//GEN-END:variables
 }
