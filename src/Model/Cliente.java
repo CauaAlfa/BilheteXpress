@@ -16,7 +16,6 @@ public class Cliente {
     private String email;
     private String BI;
     private String telefone;
-    //telefone de emergencia
     private List<Viagem> historicoViagens;
 
     public Cliente(int id, String nome, String email, String BI, String telefone) {
@@ -26,6 +25,14 @@ public class Cliente {
         this.BI = BI;
         this.telefone = telefone;
         this.historicoViagens = historicoViagens;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", BI=" + BI + ", telefone=" + telefone + ", historicoViagens=" + historicoViagens + '}';
+    }
+
+    public Cliente() {
     }
 
     public int getId() {

@@ -11,12 +11,19 @@ import java.time.LocalDate;
  */
 public class Usuario {
     private int id;
-    private String apelido;
     private String nome;
     private String email;
     private String senha;
     private String cargo;
-    private boolean status;
+   // private localDate dataCadastro;
+
+    public Usuario(int id, String nome, String email, String senha, String cargo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cargo = cargo;
+    }
 
     public int getId() {
         return id;
@@ -24,14 +31,6 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getApelido() {
-        return apelido;
-    }
-
-    public void setApelido(String apelido) {
-        this.apelido = apelido;
     }
 
     public String getNome() {
@@ -65,13 +64,4 @@ public class Usuario {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
 }
-
