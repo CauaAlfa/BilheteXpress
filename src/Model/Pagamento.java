@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Caua
@@ -12,14 +14,18 @@ public class Pagamento {
     private int id;
     private Venda venda;
     private double valorPago;
+    private Cliente cliente;
+    private Atendente atendente;
     private String tipoPagamento;
-    private localDate dataPagamento;
+    private LocalDate dataPagamento;
     private boolean statusPagamento;
 
-    public Pagamento(int id, Venda venda, double valorPago, String tipoPagamento, localDate dataPagamento, boolean statusPagamento) {
+    public Pagamento(int id, Venda venda, double valorPago, Cliente cliente, Atendente atendente, String tipoPagamento, LocalDate dataPagamento, boolean statusPagamento) {
         this.id = id;
         this.venda = venda;
         this.valorPago = valorPago;
+        this.cliente = cliente;
+        this.atendente = atendente;
         this.tipoPagamento = tipoPagamento;
         this.dataPagamento = dataPagamento;
         this.statusPagamento = statusPagamento;
@@ -57,11 +63,11 @@ public class Pagamento {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public localDate getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(localDate dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
@@ -72,6 +78,23 @@ public class Pagamento {
     public void setStatusPagamento(boolean statusPagamento) {
         this.statusPagamento = statusPagamento;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Atendente getAtendente() {
+        return atendente;
+    }
+
+    public void setAtendente(Atendente atendente) {
+        this.atendente = atendente;
+    }
+    
     
     
 }

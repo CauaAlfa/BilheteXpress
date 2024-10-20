@@ -16,6 +16,7 @@ public class Cliente {
     private String email;
     private String BI;
     private String telefone;
+    //telefone de emergencia
     private List<Viagem> historicoViagens;
 
     public Cliente(int id, String nome, String email, String BI, String telefone) {

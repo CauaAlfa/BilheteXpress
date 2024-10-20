@@ -14,6 +14,9 @@ public class Veiculo {
     private String matricula;
     private int quantidadeAssentos;
     private boolean manutencaoNecessaria;
+    private String motorista;
+    
+    
 
     public Veiculo(int id, String modelo, String matricula, int quantidadeAssentos, boolean manutencaoNecessaria) {
         this.id = id;

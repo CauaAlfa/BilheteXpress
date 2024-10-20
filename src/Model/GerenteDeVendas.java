@@ -11,7 +11,7 @@ import java.util.List;
  * @author Caua
  */
 public class GerenteDeVendas extends Usuario{
-    private List<Vendas> vendasSupervisionadas;
+    private List<Venda> vendasSupervisionadas;
     
     public GerenteDeVendas(int id, String nome, String email, String senha, String cargo) {
         super(id, nome, email, senha, cargo);
