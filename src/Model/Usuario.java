@@ -17,21 +17,6 @@ public class Usuario {
     private String senha;
     private String cargo;
     private boolean status;
-   // private localDate dataCadastro;
-
-    public Usuario(int id, String apelido, String nome, String email, String senha, String cargo, boolean status) {
-        this.id = id;
-        this.apelido = apelido;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cargo = cargo;
-        this.status = status;
-    }
-
-    public Usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     public int getId() {
         return id;
@@ -48,8 +33,6 @@ public class Usuario {
     public void setApelido(String apelido) {
         this.apelido = apelido;
     }
-    
-     
 
     public String getNome() {
         return nome;
@@ -90,6 +73,5 @@ public class Usuario {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    
 }
+

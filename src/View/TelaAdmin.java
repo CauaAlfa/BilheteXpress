@@ -7,15 +7,18 @@ package View;
 import java.sql.*;
 import Controller.EmailValidator;
 import DAO.UsuarioDAO;
+import Model.Usuario;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.awt.Color;
 import java.net.URL;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +31,7 @@ public class TelaAdmin extends javax.swing.JFrame {
      */ 
     public TelaAdmin() {
         initComponents();
+        atualizarTabela();
     }
    
         private static final String URL = "jdbc:mysql://localhost:3306/bilhetexpress";
@@ -43,6 +47,26 @@ public class TelaAdmin extends javax.swing.JFrame {
             System.out.println("Erro ao conectar com o banco de dados: " + e.getMessage());
         }
           return con;
+        }
+        
+        
+        private void atualizarTabela() {
+            DefaultTableModel modeloTabela = (DefaultTableModel) tabelaUsuarios.getModel();
+            modeloTabela.setRowCount(0);  // Limpa a tabela existente
+
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            List<Usuario> usuarios = usuarioDAO.buscarTodosUsuarios();
+
+            for (Usuario usuario : usuarios) {
+                modeloTabela.addRow(new Object[]{
+                    usuario.getId(), 
+                    usuario.getApelido(), 
+                    usuario.getNome(), 
+                    usuario.getEmail(), 
+                    usuario.getCargo(), 
+                    usuario.isStatus()
+                });
+            }
         }
 
     
@@ -83,7 +107,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         p3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaUsuarios = new javax.swing.JTable();
         p4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -362,7 +386,7 @@ public class TelaAdmin extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -388,7 +412,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelaUsuarios);
 
         javax.swing.GroupLayout p3Layout = new javax.swing.GroupLayout(p3);
         p3.setLayout(p3Layout);
@@ -576,6 +600,8 @@ public class TelaAdmin extends javax.swing.JFrame {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
     usuarioDAO.cadastrarUsuario(apelido, nome, email, senha, cargo);
+    
+    atualizarTabela();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -637,7 +663,6 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel p0;
     private javax.swing.JPanel p1;
     private javax.swing.JPanel p2;
@@ -645,6 +670,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel p4;
     private javax.swing.JPanel p5;
     private javax.swing.JPanel pMenu;
+    private javax.swing.JTable tabelaUsuarios;
     private javax.swing.JTabbedPane tp;
     private javax.swing.JTextField txtapelido;
     private javax.swing.JTextField txtemail;

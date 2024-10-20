@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -61,6 +63,34 @@ public class UsuarioDAO {
             System.out.println("Erro ao validar login: " + e.getMessage());
         }
         return usuario;
+    }
+    
+    // Método para obter todos os usuários
+    public List<Usuario> buscarTodosUsuarios() {
+        Connection con = ConexaoBD.conectar();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setApelido(rs.getString("apelido"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCargo(rs.getString("cargo"));
+                usuario.setStatus(rs.getBoolean("status"));
+
+                usuarios.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar usuários: " + e.getMessage());
+        }
+        return usuarios;
     }
 }
 
