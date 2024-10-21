@@ -765,7 +765,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                 pst.setBoolean(1, false); // Define isDelete como false
                 pst.setInt(2, id); // Define o ID do usuário
                 pst.executeUpdate();
-                JOptionPane.showConfirmDialog(null, "Usuário excluído com sucesso!");
+                JOptionPane.showConfirmDialog(null, "Usuário excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
                 // Atualiza a tabela removendo a linha excluída logicamente
               //  ((DefaultTableModel) tabelaUsuarios.getModel()).removeRow(selectedRow);
