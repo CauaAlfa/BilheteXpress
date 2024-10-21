@@ -30,7 +30,7 @@ public class TelaGerente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tp = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -87,11 +87,11 @@ public class TelaGerente extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 158, 54));
         setBorder(javax.swing.BorderFactory.createTitledBorder("Gerente"));
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 158, 54));
-        jTabbedPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
-        jTabbedPane1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        tp.setBackground(new java.awt.Color(255, 158, 54));
+        tp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tp.setForeground(new java.awt.Color(255, 255, 255));
+        tp.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
+        tp.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -168,7 +168,7 @@ public class TelaGerente extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Registo de  Vendas", jPanel1);
+        tp.addTab("Registo de  Vendas", jPanel1);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Pedidos de Cancelamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -268,7 +268,7 @@ public class TelaGerente extends javax.swing.JPanel {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTabbedPane1.addTab(" Controlo de Cancelamentos  ", jPanel3);
+        tp.addTab(" Controlo de Cancelamentos  ", jPanel3);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -370,7 +370,7 @@ public class TelaGerente extends javax.swing.JPanel {
                 .addGap(12, 12, 12))
         );
 
-        jTabbedPane1.addTab("Relatórios", jPanel2);
+        tp.addTab("Relatórios", jPanel2);
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -530,25 +530,25 @@ public class TelaGerente extends javax.swing.JPanel {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Gerir atendente", jPanel4);
+        tp.addTab("Gerir atendente", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 969, Short.MAX_VALUE)
+            .addComponent(tp, javax.swing.GroupLayout.PREFERRED_SIZE, 969, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tp, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
-        tp.setSelectedComponent(p5);
+        tp.setSelectedComponent(tp);
     }//GEN-LAST:event_jLabel21MouseClicked
 
 
@@ -595,7 +595,6 @@ public class TelaGerente extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
@@ -606,5 +605,6 @@ public class TelaGerente extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTabbedPane tp;
     // End of variables declaration//GEN-END:variables
 }
