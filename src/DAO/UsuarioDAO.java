@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,20 +24,22 @@ public class UsuarioDAO {
     public void cadastrarUsuario(String apelido, String nome, String email, String senha, String cargo) {
         Connection con = ConexaoBD.conectar();
         boolean status = true;  // Define o status inicialmente como true
-
+        boolean isDelete = true;
+        
         // Insere os valores no banco de dados
         try {
-            PreparedStatement pst = con.prepareStatement("INSERT INTO users (apelido, nome, email, senha, cargo, status) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO users (apelido, nome, email, senha, cargo, status, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?)");
             pst.setString(1, apelido);
             pst.setString(2, nome);
             pst.setString(3, email);
             pst.setString(4, senha);
             pst.setString(5, cargo);
             pst.setBoolean(6, status);
+            pst.setBoolean(7, isDelete);
             pst.executeUpdate();
-            System.out.println("Usuário cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
         } catch (SQLException e) {
-            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -56,7 +59,7 @@ public class UsuarioDAO {
                 usuario.setEmail(rs.getString("email"));
                 usuario.setSenha(rs.getString("senha"));
                 usuario.setCargo(rs.getString("cargo"));
-                // Defina outros atributos conforme necessário
+                
             }
 
         } catch (SQLException e) {
@@ -83,12 +86,13 @@ public class UsuarioDAO {
                 usuario.setSenha(rs.getString("senha"));
                 usuario.setCargo(rs.getString("cargo"));
                 usuario.setStatus(rs.getBoolean("status"));
+                usuario.setIsDelete(rs.getBoolean("isDelete"));
 
                 usuarios.add(usuario);
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao buscar usuários: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar usuários: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return usuarios;
     }

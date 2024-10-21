@@ -17,6 +17,7 @@ public class Usuario {
     private String senha;
     private String cargo;
     private boolean status;
+    private boolean isDelete;
 
     public int getId() {
         return id;
@@ -73,5 +74,15 @@ public class Usuario {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public boolean isIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+    
+    
 }
 

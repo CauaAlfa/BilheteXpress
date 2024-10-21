@@ -72,7 +72,8 @@ public class TelaAdmin extends javax.swing.JFrame {
                     usuario.getNome(), 
                     usuario.getEmail(), 
                     usuario.getCargo(), 
-                    usuario.isStatus()
+                    usuario.isStatus(),
+                    usuario.isIsDelete()
                 });
         }
 }
@@ -118,6 +119,9 @@ public class TelaAdmin extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaUsuarios = new javax.swing.JTable();
         atualizarTabela = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        txtPesquisar = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         p4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -398,20 +402,20 @@ public class TelaAdmin extends javax.swing.JFrame {
 
         tabelaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Apelido", "Nome", "Email", "Cargo", "Status"
+                "ID", "Apelido", "Nome", "Email", "Cargo", "Status", "Eliminado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -422,6 +426,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabelaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaUsuariosMouseClicked(evt);
@@ -436,6 +441,20 @@ public class TelaAdmin extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("ELIMINAR USUARIO");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_search_30px_1.png"))); // NOI18N
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout p3Layout = new javax.swing.GroupLayout(p3);
         p3.setLayout(p3Layout);
         p3Layout.setHorizontalGroup(
@@ -446,18 +465,35 @@ public class TelaAdmin extends javax.swing.JFrame {
             .addGroup(p3Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(p3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(atualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 65, Short.MAX_VALUE))
+                    .addGroup(p3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 65, Short.MAX_VALUE))
+                    .addGroup(p3Layout.createSequentialGroup()
+                        .addComponent(atualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70))))
         );
         p3Layout.setVerticalGroup(
             p3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(p3Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(atualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p3Layout.createSequentialGroup()
+                .addGroup(p3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(p3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel15))
+                    .addGroup(p3Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGroup(p3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(atualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(36, 36, 36))
         );
 
@@ -686,6 +722,62 @@ public class TelaAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tabelaUsuariosMouseClicked
 
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        String keyword = txtPesquisar.getText();
+        Connection con = conectar();
+        DefaultTableModel model = (DefaultTableModel) tabelaUsuarios.getModel();
+        model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
+
+        try {
+            String query = "SELECT * FROM users WHERE apelido LIKE ? OR nome LIKE ? OR email LIKE ? OR cargo LIKE ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, "%" + keyword + "%");
+            pst.setString(2, "%" + keyword + "%");
+            pst.setString(3, "%" + keyword + "%");
+            pst.setString(4, "%" + keyword + "%");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String apelido = rs.getString("apelido");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String cargo = rs.getString("cargo");
+                boolean status = rs.getBoolean("status");
+                boolean isDelete = rs.getBoolean("isDelete");
+                model.addRow(new Object[]{id, apelido, nome, email, cargo, status, isDelete});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Erro ao pesquisar usuários: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int selectedRow = tabelaUsuarios.getSelectedRow();
+        if (selectedRow != -1) { // Verifica se há uma linha selecionada
+            // Obtém o id do usuário na linha selecionada
+            int id = (int) tabelaUsuarios.getValueAt(selectedRow, 0);
+
+            Connection con = conectar();
+            try {
+                // Prepara a declaração SQL para atualizar o valor de isDelete
+                PreparedStatement pst = con.prepareStatement("UPDATE users SET isDelete = ? WHERE id = ?");
+                pst.setBoolean(1, false); // Define isDelete como false
+                pst.setInt(2, id); // Define o ID do usuário
+                pst.executeUpdate();
+                JOptionPane.showConfirmDialog(null, "Usuário excluído com sucesso!");
+
+                // Atualiza a tabela removendo a linha excluída logicamente
+              //  ((DefaultTableModel) tabelaUsuarios.getModel()).removeRow(selectedRow);
+
+            } catch (SQLException e) {
+                JOptionPane.showConfirmDialog(null, "Erro ao excluir usuário: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showConfirmDialog(null, "Nenhuma linha selecionada.");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -727,12 +819,14 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
@@ -756,6 +850,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JPasswordField pfsenha;
     private javax.swing.JTable tabelaUsuarios;
     private javax.swing.JTabbedPane tp;
+    private javax.swing.JTextField txtPesquisar;
     private javax.swing.JTextField txtapelido;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtnome;
