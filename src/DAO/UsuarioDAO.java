@@ -23,10 +23,9 @@ public class UsuarioDAO {
     // Método para cadastrar um novo usuário
     public void cadastrarUsuario(String apelido, String nome, String email, String senha, String cargo) {
         Connection con = ConexaoBD.conectar();
-        boolean status = true;  // Define o status inicialmente como true
+        boolean status = true;  
         boolean isDelete = true;
         
-        // Insere os valores no banco de dados
         try {
             PreparedStatement pst = con.prepareStatement("INSERT INTO users (apelido, nome, email, senha, cargo, status, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?)");
             pst.setString(1, apelido);
@@ -37,7 +36,7 @@ public class UsuarioDAO {
             pst.setBoolean(6, status);
             pst.setBoolean(7, isDelete);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
