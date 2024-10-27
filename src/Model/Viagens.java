@@ -89,6 +89,14 @@ public class Viagens {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+    
+    public boolean isIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 
     public boolean isDelete() {
         return isDelete;

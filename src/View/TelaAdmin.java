@@ -46,7 +46,6 @@ public class TelaAdmin extends javax.swing.JFrame {
         initComponents();
         atualizarTabela();
         atualizarTabelaAutocarros();
-     //   atualizarTabelaViagens();
     }
    
         private static final String URL = "jdbc:mysql://localhost:3306/bilhetexpress";
@@ -82,15 +81,17 @@ public class TelaAdmin extends javax.swing.JFrame {
                     usuario.isStatus(),
                     usuario.isIsDelete()
                 });
-        }
-            
+            }            
         }
 
         private void atualizarTabelaAutocarros() {
+            DefaultTableModel model = (DefaultTableModel) tabelaAutocarros.getModel();
+            model.setRowCount(0);
+            
             AutocarrosDAO autocarrosDAO = new AutocarrosDAO();
             List<Autocarros> autocarros = autocarrosDAO.buscarTodosAutocarros();
-            DefaultTableModel model = (DefaultTableModel) tabelaAutocarros.getModel();
-            model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
+            
+            
 
 
             for (Autocarros autocarro : autocarros) {
@@ -109,6 +110,8 @@ public class TelaAdmin extends javax.swing.JFrame {
         
 
         
+        
+
     
         
         
@@ -639,7 +642,7 @@ public class TelaAdmin extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
@@ -1186,7 +1189,6 @@ public class TelaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        
         String modelo = txtModelo.getText().trim();
         String matricula = txtMatricula.getText().trim();
         String assentosTexto = txtAssentos.getText().trim();
@@ -1223,7 +1225,7 @@ public class TelaAdmin extends javax.swing.JFrame {
             manutencao,
             motoristaApelido,
             motoristaNome,
-            sexo  // Status padrão
+            sexo  
         });
 
         atualizarTabelaAutocarros(); 
@@ -1325,7 +1327,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel32MouseClicked
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        String partida = lblPartida.getText().trim();
+        String partida = txtPartida.getText().trim();
         String destino = txtDestino.getText().trim();
         String autocarro = txtAutocarro.getText().trim();
         String data = txtData.getText().trim();
@@ -1343,7 +1345,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         ViagensDAO viagemDAO = new ViagensDAO();
         viagemDAO.cadastrarViagem(partida, destino, autocarro, data, hora, preco);
 
-       // atualizarTabelaViagens();
+        //atualizarTabelaViagens();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
