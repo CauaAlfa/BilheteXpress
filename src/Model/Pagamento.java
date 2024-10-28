@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Pagamento {
     private int id;
-    private Venda venda;
+    private Reservas reserva;
     private double valorPago;
     private Cliente cliente;
     private Atendente atendente;
@@ -20,9 +20,9 @@ public class Pagamento {
     private LocalDate dataPagamento;
     private boolean statusPagamento;
 
-    public Pagamento(int id, Venda venda, double valorPago, Cliente cliente, Atendente atendente, String tipoPagamento, LocalDate dataPagamento, boolean statusPagamento) {
+    public Pagamento(int id, Reservas reserva, double valorPago, Cliente cliente, Atendente atendente, String tipoPagamento, LocalDate dataPagamento, boolean statusPagamento) {
         this.id = id;
-        this.venda = venda;
+        this.reserva = reserva;
         this.valorPago = valorPago;
         this.cliente = cliente;
         this.atendente = atendente;
@@ -39,12 +39,12 @@ public class Pagamento {
         this.id = id;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public Reservas getVenda() {
+        return reserva;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setVenda(Reservas reserva) {
+        this.reserva = reserva;
     }
 
     public double getValorPago() {

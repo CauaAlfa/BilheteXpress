@@ -10,21 +10,32 @@ import java.util.List;
  *
  * @author Caua
  */
+import java.util.List;
+
 public class Cliente {
     private int id;
+    private String apelido;
     private String nome;
     private String email;
-    private String BI;
+    private String BI;  // Bilhete de Identidade
     private String telefone;
-    //telefone de emergencia
-    private List<Viagem> historicoViagens;
+    private String telefoneEmergencia;
+    private String sexo;
+    private List<Viagens> historicoViagens;
 
-    public Cliente(int id, String nome, String email, String BI, String telefone) {
+    // Construtor padrão
+    public Cliente() {
+    }
+
+    public Cliente(int id, String apelido, String nome, String email, String BI, String telefone, String telefoneEmergencia, String sexo, List<Viagens> historicoViagens) {
         this.id = id;
+        this.apelido = apelido;
         this.nome = nome;
         this.email = email;
         this.BI = BI;
         this.telefone = telefone;
+        this.telefoneEmergencia = telefoneEmergencia;
+        this.sexo = sexo;
         this.historicoViagens = historicoViagens;
     }
 
@@ -34,6 +45,14 @@ public class Cliente {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
     }
 
     public String getNome() {
@@ -68,14 +87,27 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public List<Viagem> getHistoricoViagens() {
+    public String getTelefoneEmergencia() {
+        return telefoneEmergencia;
+    }
+
+    public void setTelefoneEmergencia(String telefoneEmergencia) {
+        this.telefoneEmergencia = telefoneEmergencia;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<Viagens> getHistoricoViagens() {
         return historicoViagens;
     }
 
-    public void setHistoricoViagens(List<Viagem> historicoViagens) {
+    public void setHistoricoViagens(List<Viagens> historicoViagens) {
         this.historicoViagens = historicoViagens;
     }
-    
-    
-    
 }
