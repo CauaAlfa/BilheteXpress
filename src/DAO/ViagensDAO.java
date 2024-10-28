@@ -83,7 +83,32 @@ public class ViagensDAO {
         }
     }
 
-    
+    public Viagens buscarViagemPorId(int id) {
+        Connection con = ConexaoBD.conectar();
+        Viagens viagem = null;
+
+        try {
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Viagens WHERE id = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                viagem = new Viagens();
+                viagem.setId(rs.getInt("id"));
+                viagem.setPartida(rs.getString("partida"));
+                viagem.setDestino(rs.getString("destino"));
+                viagem.setAutocarro(rs.getString("autocarro"));
+                viagem.setData(rs.getString("data"));
+                viagem.setHora(rs.getString("hora"));
+                viagem.setPreco(rs.getDouble("preco"));
+                viagem.setDelete(rs.getBoolean("isDelete"));
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar viagem: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return viagem;
+    }
     
     
 }
