@@ -136,7 +136,7 @@ public class TelaRegisto3 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaReservas);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("ACTUALIZAR");
 
         jButton2.setText("jButton2");
 

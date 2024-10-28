@@ -5,24 +5,17 @@
 package View;
 
 import java.sql.*;
-import Controller.EmailValidator;
 import DAO.AutocarrosDAO;
 import DAO.UsuarioDAO;
 import DAO.ViagensDAO;
 import Model.Autocarros;
 import Model.Usuario;
-import Model.Viagens;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
