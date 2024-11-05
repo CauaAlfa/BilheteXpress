@@ -6,19 +6,27 @@ package View;
 
 import java.sql.*;
 import DAO.AutocarrosDAO;
+import DAO.RelatorioDAO;
 import DAO.UsuarioDAO;
 import DAO.ViagensDAO;
 import Model.Autocarros;
 import Model.Usuario;
+import Model.Viagens;
+import java.awt.Color;
+import java.awt.Font;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.awt.GridLayout;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,10 +43,16 @@ public class TelaAdmin extends javax.swing.JFrame {
     /**
      * Creates new form TelaAdmin
      */ 
+    
+    private String apelido;
+    
     public TelaAdmin() {
+        this.apelido = apelido;
         initComponents();
         atualizarTabela();
         atualizarTabelaAutocarros();
+        atualizarTabelaViagens();
+        lblApelido.setText("Bem-vindo, " + this.apelido);
     }
    
         private static final String URL = "jdbc:mysql://localhost:3306/bilhetexpress";
@@ -56,6 +70,18 @@ public class TelaAdmin extends javax.swing.JFrame {
           return con;
         }
         
+        public void validarCamposVazios(){
+            JLabel messageCamposVazios = new JLabel("Preencha todos os campos antes de cadastrar.");
+            messageCamposVazios.setFont(new Font("Arial", Font.BOLD, 14));
+            messageCamposVazios.setForeground(Color.red);
+            
+            JOptionPane  optionpane = new JOptionPane(messageCamposVazios, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+            JDialog dialog = optionpane.createDialog(this, "Aviso");
+            
+            //mover para o topo da frame
+          //  dialog.setLocation(this.getLocationOnScreen().x + (this,getWidth() - dialog.getWidth()) / 2, this.getLocationOnScreen().y);
+            dialog.setVisible(true);
+        }
         
         private void atualizarTabela() {
             DefaultTableModel modeloTabela = (DefaultTableModel) tabelaUsuarios.getModel();
@@ -100,9 +126,8 @@ public class TelaAdmin extends javax.swing.JFrame {
                     autocarro.isIsDelete()
                 });
             }
-        
 
-        
+
         
 
     
@@ -147,7 +172,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel34 = new javax.swing.JLabel();
+        lblApelido = new javax.swing.JLabel();
         p2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -203,10 +228,16 @@ public class TelaAdmin extends javax.swing.JFrame {
         tabelaViagens = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtPesquisar2 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
         p5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtRelatorio = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -369,6 +400,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Senha");
 
+        jButton3.setBackground(new java.awt.Color(255, 158, 54));
         jButton3.setText("CADASTRAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,8 +417,6 @@ public class TelaAdmin extends javax.swing.JFrame {
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel34.setText("jLabel34");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -396,8 +426,8 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 509, Short.MAX_VALUE))
+                .addComponent(lblApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 425, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +436,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3)
-                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblApelido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -414,6 +444,16 @@ public class TelaAdmin extends javax.swing.JFrame {
         p1.setLayout(p1Layout);
         p1Layout.setHorizontalGroup(
             p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115))))
             .addGroup(p1Layout.createSequentialGroup()
                 .addGap(212, 212, 212)
                 .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,17 +471,7 @@ public class TelaAdmin extends javax.swing.JFrame {
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtemail, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                             .addComponent(pfsenha))))
-                .addContainerGap(267, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p1Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         p1Layout.setVerticalGroup(
             p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,6 +683,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         lblPartida.setForeground(new java.awt.Color(255, 255, 255));
         lblPartida.setText("Partida");
 
+        txtPartida.setBackground(new java.awt.Color(0, 51, 51));
         txtPartida.setForeground(new java.awt.Color(255, 255, 255));
         txtPartida.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
@@ -660,6 +691,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Autocarro");
 
+        txtAutocarro.setBackground(new java.awt.Color(0, 51, 51));
         txtAutocarro.setForeground(new java.awt.Color(255, 255, 255));
         txtAutocarro.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
@@ -667,6 +699,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Destino");
 
+        txtDestino.setBackground(new java.awt.Color(0, 51, 51));
         txtDestino.setForeground(new java.awt.Color(255, 255, 255));
         txtDestino.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
@@ -674,6 +707,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Preco");
 
+        txtPreco.setBackground(new java.awt.Color(0, 51, 51));
         txtPreco.setForeground(new java.awt.Color(255, 255, 255));
         txtPreco.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
@@ -681,6 +715,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Data");
 
+        txtData.setBackground(new java.awt.Color(0, 51, 51));
         txtData.setForeground(new java.awt.Color(255, 255, 255));
         txtData.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
@@ -696,7 +731,7 @@ public class TelaAdmin extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
@@ -737,6 +772,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Hora");
 
+        txtHora.setBackground(new java.awt.Color(0, 51, 51));
         txtHora.setForeground(new java.awt.Color(255, 255, 255));
         txtHora.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
@@ -970,21 +1006,28 @@ public class TelaAdmin extends javax.swing.JFrame {
         tabelaViagens.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tabelaViagens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Rota", "Motorista", "Autocarro", "Preco", "Status", "Title 7"
+                "ID", "Partida", "Destino", "Autocarro", "Data", "Hora", "Preco", "Eliminado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabelaViagens);
@@ -997,6 +1040,18 @@ public class TelaAdmin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_search_30px_1.png"))); // NOI18N
+        jLabel34.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel34MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout p4Layout = new javax.swing.GroupLayout(p4);
         p4.setLayout(p4Layout);
@@ -1009,11 +1064,17 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addGap(71, 71, 71)
                 .addGroup(p4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(p4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 71, Short.MAX_VALUE))
+                    .addGroup(p4Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 71, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPesquisar2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel34)
+                        .addGap(74, 74, 74))))
         );
         p4Layout.setVerticalGroup(
             p4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1022,9 +1083,11 @@ public class TelaAdmin extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(p4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(p4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPesquisar2))
                 .addGap(0, 46, Short.MAX_VALUE))
         );
 
@@ -1041,19 +1104,46 @@ public class TelaAdmin extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setText("jButton8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        txtRelatorio.setEditable(false);
+        txtRelatorio.setColumns(20);
+        txtRelatorio.setRows(5);
+        jScrollPane4.setViewportView(txtRelatorio);
+
         javax.swing.GroupLayout p5Layout = new javax.swing.GroupLayout(p5);
         p5.setLayout(p5Layout);
         p5Layout.setHorizontalGroup(
             p5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p5Layout.createSequentialGroup()
-                .addGap(0, 1020, Short.MAX_VALUE)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(p5Layout.createSequentialGroup()
+                .addContainerGap(178, Short.MAX_VALUE)
+                .addGroup(p5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(136, 136, 136)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p5Layout.createSequentialGroup()
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
         p5Layout.setVerticalGroup(
             p5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p5Layout.createSequentialGroup()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 469, Short.MAX_VALUE))
+                .addGroup(p5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(p5Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(p5Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         tp.addTab("tab6", p5);
@@ -1121,11 +1211,11 @@ public class TelaAdmin extends javax.swing.JFrame {
     String cargo = comboBox.getSelectedItem().toString();
     
         if (apelido.isEmpty() || nome.isEmpty() || email.isEmpty() || senha.isEmpty() || cargo.isEmpty()) {
-            System.out.println("Preencha todos os campos antes de cadastrar.");
+            validarCamposVazios();
         } else {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.cadastrarUsuario(apelido, nome, email, senha, cargo);
-
+            //    messageCamposVazios.setText("");
                 txtapelido.setText("");
                 txtnome.setText("");
                 txtemail.setText("");
@@ -1252,7 +1342,8 @@ public class TelaAdmin extends javax.swing.JFrame {
         String sexo = comboBoxSexo.getSelectedItem().toString().trim();
 
         if (modelo.isEmpty() || matricula.isEmpty() || assentosTexto.isEmpty() || motoristaApelido.isEmpty() || motoristaNome.isEmpty() || sexo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            validarCamposVazios();
             return;
         }
 
@@ -1390,7 +1481,7 @@ public class TelaAdmin extends javax.swing.JFrame {
 
         if (partida.isEmpty() || destino.isEmpty() || autocarro.isEmpty() || 
             data.isEmpty() || hora.isEmpty() || precoTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            validarCamposVazios();
             return;  
         }
 
@@ -1399,7 +1490,25 @@ public class TelaAdmin extends javax.swing.JFrame {
         ViagensDAO viagemDAO = new ViagensDAO();
         viagemDAO.cadastrarViagem(partida, destino, autocarro, data, hora, preco);
 
-        //atualizarTabelaViagens();
+        txtPartida.setText("");
+        txtDestino.setText("");
+        txtAutocarro.setText("");
+        txtData.setText("");
+        txtHora.setText("");
+        txtPreco.setText("");
+        
+        DefaultTableModel model = (DefaultTableModel) tabelaViagens.getModel();
+        model.addRow(new Object[]{ 
+            null,
+            partida,
+            destino,
+            autocarro,
+            data,
+            hora,
+            preco,
+            false // isDelete inicial como false });
+        });
+       // atualizarTabelaViagens();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1441,13 +1550,102 @@ public class TelaAdmin extends javax.swing.JFrame {
                 ViagensDAO viagemDAO = new ViagensDAO();
                 viagemDAO.atualizarViagem(id, novoAutocarro, novaData, novaHora, novoPreco, novoIsDelete);
 
-            //    atualizarTabelaViagens();  
+                atualizarTabelaViagens();  
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma viagem para atualizar.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int selectedRow = tabelaViagens.getSelectedRow();
+        if (selectedRow != -1) {  // Verifica se há uma linha selecionada
+            int id = (int) tabelaViagens.getValueAt(selectedRow, 0);
+
+            ViagensDAO viagemDAO = new ViagensDAO();
+            viagemDAO.eliminarViagem(id);
+
+            DefaultTableModel model = (DefaultTableModel) tabelaViagens.getModel();
+            model.removeRow(selectedRow);
+
+            JOptionPane.showMessageDialog(this, "Viagem removida com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma viagem para eliminar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
+        String keyword = txtPesquisar2.getText();
+        Connection con = conectar();
+        
+        ViagensDAO viagemDAO = new ViagensDAO();
+        List<Viagens> viagens = viagemDAO.pesquisarViagens(keyword);
+        
+        DefaultTableModel model = (DefaultTableModel) tabelaViagens.getModel();
+        model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
+        
+        try {
+            String query = "SELECT * FROM viagens WHERE isDelete = false AND " + "(partida LIKE ? OR destino LIKE ? OR autocarro LIKE ? OR data LIKE ?)";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, "%" + keyword + "%");
+            pst.setString(2, "%" + keyword + "%");
+            pst.setString(3, "%" + keyword + "%");
+            pst.setString(4, "%" + keyword + "%");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String partida = rs.getString("partida");
+                String destino = rs.getString("destino");
+                String autocarro = rs.getString("autocarro");
+                String data = rs.getString("data");
+                String hora = rs.getString("hora");
+                double preco = rs.getDouble("preco");
+                boolean isDelete = rs.getBoolean("isDelete");
+                model.addRow(new Object[]{id, partida, destino, autocarro, data, hora, preco, isDelete});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Erro ao pesquisar usuários: " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_jLabel34MouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String relatorio = txtRelatorio.getText();
+        String caminhoArquivo = "C:\\Users\\Caua\\Documents\\GitHub\\BilheteXpress.txt";  // Defina o caminho onde deseja salvar o arquivo
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo))) {
+            writer.write(relatorio);
+            JOptionPane.showMessageDialog(this, "Relatório gerado e salvo com sucesso em: " + caminhoArquivo, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar relatório: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    
+    
+        private void atualizarTabelaViagens() {
+            ViagensDAO viagemDAO = new ViagensDAO();
+            List<Viagens> viagens = viagemDAO.buscarTodasViagens();
+            
+            DefaultTableModel model = (DefaultTableModel) tabelaViagens.getModel();
+            model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
+
+            for (Viagens viagem : viagens) {
+                model.addRow(new Object[]{
+                    viagem.getId(),
+                    viagem.getPartida(),
+                    viagem.getDestino(),
+                    viagem.getAutocarro(),
+                    viagem.getData(),
+                    viagem.getHora(),
+                    viagem.getPreco(),
+                    viagem.isDelete()
+                });
+            }
+            txtRelatorio.setText(new RelatorioDAO().gerarRelatorio());
+        }
+    
     /**
      * @param args the command line arguments
      */
@@ -1495,6 +1693,7 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1535,9 +1734,11 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblApelido;
     private javax.swing.JLabel lblPartida;
     private javax.swing.JPanel p0;
     private javax.swing.JPanel p1;
@@ -1562,8 +1763,10 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txtMotoristaNome;
     private javax.swing.JTextField txtPartida;
     private javax.swing.JTextField txtPesquisar;
+    private javax.swing.JTextField txtPesquisar2;
     private javax.swing.JTextField txtPesquisarAutocarros;
     private javax.swing.JTextField txtPreco;
+    private javax.swing.JTextArea txtRelatorio;
     private javax.swing.JTextField txtapelido;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtnome;

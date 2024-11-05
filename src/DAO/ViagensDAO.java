@@ -81,6 +81,8 @@ public class ViagensDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar viagem: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }
 
     public Viagens buscarViagemPorId(int id) {
@@ -110,5 +112,51 @@ public class ViagensDAO {
         return viagem;
     }
     
-    
+    public void eliminarViagem(int id) {
+        Connection con = ConexaoBD.conectar();
+        try {
+            String sql = "UPDATE Viagens SET isDelete = true WHERE id = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Viagem eliminada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao eliminar viagem: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public List<Viagens> pesquisarViagens(String termo) {
+        Connection con = ConexaoBD.conectar();
+        List<Viagens> viagens = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Viagens WHERE isDelete = false AND " + "(partida LIKE ? OR destino LIKE ? OR autocarro LIKE ? OR data LIKE ?)";
+            PreparedStatement pst = con.prepareStatement(query);
+            String searchPattern = "%" + termo + "%";
+            pst.setString(1, searchPattern);
+            pst.setString(2, searchPattern);
+            pst.setString(3, searchPattern);
+            pst.setString(4, searchPattern);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Viagens viagem = new Viagens();
+                viagem.setId(rs.getInt("id"));
+                viagem.setPartida(rs.getString("partida"));
+                viagem.setDestino(rs.getString("destino"));
+                viagem.setAutocarro(rs.getString("autocarro"));
+                viagem.setData(rs.getString("data"));
+                viagem.setHora(rs.getString("hora"));
+                viagem.setPreco(rs.getDouble("preco"));
+                viagem.setDelete(rs.getBoolean("isDelete"));
+
+                viagens.add(viagem);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar viagens: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return viagens;
+    }
+
 }

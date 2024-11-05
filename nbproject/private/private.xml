@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/View/login.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/View/TelaAdmin.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/Controller/EmailValidator.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/View/TelaRegisto2.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/DAO/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/View/Load.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/DAO/ReservasDAO.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/View/TelaRegisto3.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/DAO/ConexaoBD.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/DAO/AutocarrosDAO.java</file>
+            <file>file:/C:/Users/Caua/Documents/GitHub/BilheteXpress/src/View/TelaRegisto4.java</file>
+        </group>
     </open-files>
 </project-private>

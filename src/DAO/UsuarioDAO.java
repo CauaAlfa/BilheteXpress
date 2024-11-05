@@ -114,5 +114,44 @@ public class UsuarioDAO {
      }
     }
 
+    public String buscarApelidoPorEmail(String email) {
+        Connection con = ConexaoBD.conectar();
+        String apelido = "";
+
+        try {
+            String sql = "SELECT apelido FROM users WHERE email = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                apelido = rs.getString("apelido");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar apelido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return apelido;
+    }
+    
+
+    public boolean atualizarSenha(String email, String novaSenha) {
+        Connection con = ConexaoBD.conectar();
+        try {
+            String sql = "UPDATE Usuarios SET senha = ? WHERE email = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, novaSenha);
+            pst.setString(2, email);
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar senha: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
 }
+
+    
+
 

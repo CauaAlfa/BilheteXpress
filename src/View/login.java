@@ -91,7 +91,7 @@ public class login extends javax.swing.JFrame {
                 jLabel2MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 40, 29));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 50, 50));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,7 +102,7 @@ public class login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Bem-vindo(a), vamos comecar daqui!");
+        jLabel4.setText("Vamos iniciar a viagem daqui. Bem-vindo(a)");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 94, 420, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -225,7 +225,6 @@ public class login extends javax.swing.JFrame {
                     //emailValidator.showError("O e-mail não é válido.");
                     txtEmail.requestFocus();
                 }
-            
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -242,14 +241,18 @@ public class login extends javax.swing.JFrame {
             String cargo = usuario.getCargo();
             if ("Administrador".equals(cargo)) {
                 new TelaAdmin().setVisible(true);
+                String apelido = usuarioDAO.buscarApelidoPorEmail(email);
+                dispose();
             } else if ("Gerente de Venda".equals(cargo)) {
-             //   new TelaGerenteVenda().setVisible(true);
+                new Telagerente2().setVisible(true);
+                dispose();
             } else if ("Atendente".equals(cargo)) {
-             //   new TelaAtendente().setVisible(true);
+                new TelaRegisto2().setVisible(true);
+                dispose();
             }
         } else {
             System.out.println("Login falhou. Verifique suas credenciais.");
-        
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     

@@ -82,6 +82,57 @@ public class ReservasDAO {
         }
         return reservas;
     }
-                
-              
+
+
+    public List<Reservas> pesquisarReservas(String partida, String destino, String data, String nome, String apelido, String BI, String sexo) {
+        Connection con = ConexaoBD.conectar();
+        List<Reservas> reservas = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Reservas WHERE (partida LIKE ? OR ? IS NULL) AND (destino LIKE ? OR ? IS NULL) AND (data LIKE ? OR ? IS NULL) AND (nome LIKE ? OR ? IS NULL) AND (apelido LIKE ? OR ? IS NULL) AND (BI LIKE ? OR ? IS NULL) AND (sexo LIKE ? OR ? IS NULL)";
+            PreparedStatement pst = con.prepareStatement(query);
+            String searchPattern = "%" + partida + "%";
+            pst.setString(1, searchPattern);
+            pst.setString(2, partida);
+            pst.setString(3, "%" + destino + "%");
+            pst.setString(4, destino);
+            pst.setString(5, "%" + data + "%");
+            pst.setString(6, data);
+            pst.setString(7, "%" + nome + "%");
+            pst.setString(8, nome);
+            pst.setString(9, "%" + apelido + "%");
+            pst.setString(10, apelido);
+            pst.setString(11, "%" + BI + "%");
+            pst.setString(12, BI);
+            pst.setString(13, "%" + sexo + "%");
+            pst.setString(14, sexo);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Reservas reserva = new Reservas();
+                reserva.setId(rs.getInt("id"));
+                reserva.setPartida(rs.getString("partida"));
+                reserva.setDestino(rs.getString("destino"));
+                reserva.setAutocarro(rs.getString("autocarro"));
+                reserva.setData(rs.getString("data"));
+                reserva.setHora(rs.getString("hora"));
+                reserva.setPreco(rs.getDouble("preco"));
+                reserva.setApelido(rs.getString("apelido"));
+                reserva.setNome(rs.getString("nome"));
+                reserva.setEmail(rs.getString("email"));
+                reserva.setBI(rs.getString("BI"));
+                reserva.setTelefone(rs.getString("telefone"));
+                reserva.setTelefoneEmergencia(rs.getString("telefoneEmergencia"));
+                reserva.setSexo(rs.getString("sexo"));
+                reserva.setStatus(rs.getBoolean("status"));
+
+                reservas.add(reserva);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar reservas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return reservas;
+    }
+          
 }

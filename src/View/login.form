@@ -111,7 +111,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="380" y="0" width="40" height="29"/>
+              <AbsoluteConstraints x="370" y="0" width="50" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -141,7 +141,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Bem-vindo(a), vamos comecar daqui!"/>
+            <Property name="text" type="java.lang.String" value="Vamos iniciar a viagem daqui. Bem-vindo(a)"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

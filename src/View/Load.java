@@ -38,6 +38,8 @@ public class Load extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
         jPanel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -110,6 +112,7 @@ public class Load extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -143,14 +146,16 @@ public class Load extends javax.swing.JFrame {
            load.setVisible(true);
             try {
                for (int i = 0 ; i <= 100; i +=2){
-                   Thread.sleep(70);
+                   Thread.sleep(80);
                    
                    load.Barra.setValue(i);
                    load.percent.setText(Integer.toString(i)+ "%" );
               }
-               load.dispose();
-             /* TelaGerente telagerente = new TelaGerente ();
-            telagerente.setVisible(true);*/
+               
+              load.dispose();
+              login tela = new login();
+              tela.setVisible(true);
+              
             }catch(InterruptedException e){
                 JOptionPane.showConfirmDialog(null, "erro!");
             }
