@@ -150,6 +150,35 @@ public class UsuarioDAO {
         }
     }
 
+
+    public List<Usuario> buscarAtendentes() {
+        Connection con = ConexaoBD.conectar();
+        List<Usuario> atendentes = new ArrayList<>();
+
+        try {
+            String sql = "SELECT id, apelido, nome, email, cargo, status FROM Users WHERE cargo = 'Atendente'";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Usuario atendente = new Usuario();
+                atendente.setId(rs.getInt("id"));
+                atendente.setApelido(rs.getString("apelido"));
+                atendente.setNome(rs.getString("nome"));
+                atendente.setEmail(rs.getString("email"));
+                atendente.setCargo(rs.getString("cargo"));
+                atendente.setStatus(rs.getBoolean("status"));
+
+                atendentes.add(atendente);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar atendentes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return atendentes;
+    }
+
+    
 }
 
     

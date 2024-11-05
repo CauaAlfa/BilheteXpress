@@ -24,6 +24,7 @@ public class TelaRegisto3 extends javax.swing.JFrame {
      */
     
     private TelaRegisto2 telaRegisto2;
+    private Telagerente2 telagerente2;
     
     public TelaRegisto3() {
         initComponents();
@@ -31,6 +32,12 @@ public class TelaRegisto3 extends javax.swing.JFrame {
     }
     
     public TelaRegisto3(TelaRegisto2 telaRegisto2) {
+        this.telaRegisto2 = telaRegisto2;
+        initComponents();
+        atualizarTabelaReservas();
+    }
+    
+    public TelaRegisto3(Telagerente2 telagerente2) {
         this.telaRegisto2 = telaRegisto2;
         initComponents();
         atualizarTabelaReservas();
@@ -59,7 +66,11 @@ public class TelaRegisto3 extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) tabelaReservas.getModel();
         model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
+    //    DefaultTableModel model = (DefaultTableModel) tabelaReservas2.getModel();
+    //    model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
 
+        
+        
             for (Reservas reserva : reservas) {
                 model.addRow(new Object[]{
                     reserva.getId(),
