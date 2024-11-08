@@ -13,6 +13,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,13 +25,15 @@ public class EmailSender {
 
     public static void enviarCodigoRecuperacao(String emailDestinatario, String codigoRecuperacao) {
         final String username = "alfacaua2005@gmail.com";
-        final String password = "181221CAUA";
+        final String password = "k d l m h b g t v x a a h w j a";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+    Properties props = new Properties();
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.port", "587");
+    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");  
+
 
         javax.mail.Session session = javax.mail.Session.getInstance(props,
             new javax.mail.Authenticator() {
@@ -51,8 +54,10 @@ public class EmailSender {
             System.out.println("Email enviado com sucesso!");
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();  // Adiciona esse código para ver mais detalhes
+            JOptionPane.showMessageDialog(null, "Erro ao enviar email: " + e.getMessage());
         }
+
     }
 
     public static String gerarCodigoRecuperacao() {
