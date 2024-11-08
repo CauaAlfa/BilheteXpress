@@ -152,9 +152,9 @@ public class Load extends javax.swing.JFrame {
                    load.percent.setText(Integer.toString(i)+ "%" );
               }
                
-              load.dispose();
-              login tela = new login();
-              tela.setVisible(true);
+//              load.dispose();
+//              login tela = new login();
+//              tela.setVisible(true);
               
             }catch(InterruptedException e){
                 JOptionPane.showConfirmDialog(null, "erro!");
@@ -162,7 +162,7 @@ public class Load extends javax.swing.JFrame {
         
           java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Load().setVisible(true);
+                //new Load().setVisible(true);
             }
         });
     

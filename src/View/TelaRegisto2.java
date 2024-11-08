@@ -452,11 +452,11 @@ public class TelaRegisto2 extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel36)
-                                    .addGap(41, 41, 41))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel33)
-                                    .addGap(87, 87, 87)))))
+                                    .addGap(87, 87, 87))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel36)
+                                    .addGap(104, 104, 104)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(296, 296, 296)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,7 +527,11 @@ public class TelaRegisto2 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel36)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -556,25 +560,19 @@ public class TelaRegisto2 extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addGap(39, 39, 39))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel45)
+                                .addGap(10, 10, 10)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jLabel36)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel45)
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(1, 1, 1)
-                                                .addComponent(comboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtIdViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel34)
-                                                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                            .addComponent(jLabel1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(1, 1, 1)
+                                        .addComponent(comboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtIdViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel34)
+                                            .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -660,29 +658,29 @@ public class TelaRegisto2 extends javax.swing.JFrame {
 
     private void txtIdViagemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdViagemKeyReleased
         // Verifica se o campo de ID não está vazio e contém um número válido
-    String idTexto = txtIdViagem.getText().trim();
-    if (!idTexto.isEmpty() && idTexto.matches("\\d+")) {
-        int id = Integer.parseInt(idTexto);
+        String idTexto = txtIdViagem.getText().trim();
+        if (!idTexto.isEmpty() && idTexto.matches("\\d+")) {
+            int id = Integer.parseInt(idTexto);
 
-        // Busca os dados da viagem com base no ID
-        ViagensDAO viagemDAO = new ViagensDAO();
-        Viagens viagem = viagemDAO.buscarViagemPorId(id);
+            // Busca os dados da viagem com base no ID
+            ViagensDAO viagemDAO = new ViagensDAO();
+            Viagens viagem = viagemDAO.buscarViagemPorId(id);
 
-        if (viagem != null) {
-            txtPartida.setText(viagem.getPartida());
-            txtDestino.setText(viagem.getDestino());
-            txtAutocarro.setText(viagem.getAutocarro());
-            txtData.setText(viagem.getData());
-            txtHora.setText(viagem.getHora());
-            txtPreco.setText(String.valueOf(viagem.getPreco()));
-        } else {
-            
-            txtPartida.setText("");
-            txtDestino.setText("");
-            txtAutocarro.setText("");
-            txtData.setText("");
-            txtHora.setText("");
-            txtPreco.setText("");
+            if (viagem != null) {
+                txtPartida.setText(viagem.getPartida());
+                txtDestino.setText(viagem.getDestino());
+                txtAutocarro.setText(viagem.getAutocarro());
+                txtData.setText(viagem.getData());
+                txtHora.setText(viagem.getHora());
+                txtPreco.setText(String.valueOf(viagem.getPreco()));
+            } else {
+
+                txtPartida.setText("");
+                txtDestino.setText("");
+                txtAutocarro.setText("");
+                txtData.setText("");
+                txtHora.setText("");
+                txtPreco.setText("");
         }
     }
     }//GEN-LAST:event_txtIdViagemKeyReleased

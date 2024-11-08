@@ -53,7 +53,6 @@ public class login extends javax.swing.JFrame {
         pfpassword = new javax.swing.JPasswordField();
         disable = new javax.swing.JLabel();
         show = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,13 +153,6 @@ public class login extends javax.swing.JFrame {
             }
         });
         jPanel2.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 40, 40));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Forget Password?");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, 27));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 153, 255));
@@ -300,7 +292,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel disable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

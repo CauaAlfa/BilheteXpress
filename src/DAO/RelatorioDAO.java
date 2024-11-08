@@ -75,7 +75,7 @@ public class RelatorioDAO {
             }
 
             // Mais informações relevantes
-            relatorio.append("... Outros dados relevantes ...\n");
+          //  relatorio.append("... Outros dados relevantes ...\n");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
