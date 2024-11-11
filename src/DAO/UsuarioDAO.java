@@ -26,6 +26,10 @@ public class UsuarioDAO {
         boolean status = true;  
         boolean isDelete = true;
         
+        if (verificarEmailExistente(email, con)) {
+            JOptionPane.showMessageDialog(null, "Erro: O email já está cadastrado.", "Erro", JOptionPane.ERROR_MESSAGE); return; 
+        }
+        
         try {
             PreparedStatement pst = con.prepareStatement("INSERT INTO users (apelido, nome, email, senha, cargo, status, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?)");
             pst.setString(1, apelido);
@@ -40,7 +44,25 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
+    }    
+        
+        private boolean verificarEmailExistente(String email, Connection con) {
+            boolean emailExiste = false; 
+            
+            try { 
+                PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM users WHERE email = ?");
+                pst.setString(1, email);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    emailExiste = rs.getInt(1) > 0; 
+                } 
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao verificar email: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE); 
+            } 
+            return emailExiste; 
+        }
+        
+    
 
     // Método para validar login de um usuário
     public Usuario login(String email, String senha) {
@@ -178,7 +200,7 @@ public class UsuarioDAO {
         return atendentes;
     }
 
-    
+ 
 }
 
     

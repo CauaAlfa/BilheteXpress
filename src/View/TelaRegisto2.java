@@ -10,10 +10,14 @@ import Model.Cliente;
 import Model.Reservas;
 import Model.Viagens;
 import View.TelaRegisto3;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,6 +50,20 @@ public class TelaRegisto2 extends javax.swing.JFrame {
           return con;
         }
     
+        
+        public void validarCamposVazios(){
+            JLabel messageCamposVazios = new JLabel("Preencha todos os campos antes de cadastrar.");
+            messageCamposVazios.setFont(new Font("Arial", Font.BOLD, 14));
+            messageCamposVazios.setForeground(Color.red);
+            
+            JOptionPane  optionpane = new JOptionPane(messageCamposVazios, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+            JDialog dialog = optionpane.createDialog(this, "Aviso");
+            
+            //mover para o topo da frame
+          //  dialog.setLocation(this.getLocationOnScreen().x + (this,getWidth() - dialog.getWidth()) / 2, this.getLocationOnScreen().y);
+            dialog.setVisible(true);
+        }
+        
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -721,13 +739,18 @@ public class TelaRegisto2 extends javax.swing.JFrame {
 
         if (partida.isEmpty() || destino.isEmpty() || autocarro.isEmpty() || data.isEmpty() || hora.isEmpty() || preco <= 0 ||
             apelido.isEmpty() || nome.isEmpty() || email.isEmpty() || BI.isEmpty() || telefone.isEmpty() || telefoneEmergencia.isEmpty() || sexo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            validarCamposVazios();
             return;  
         }
         
         if (txtTroco.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Calcule o troco antes de cadastrar a viagem.", "Erro", JOptionPane.ERROR_MESSAGE);
-        return;  
+            JLabel messageTrocos = new JLabel("Calcule o troco antes de cadastrar a viagem.");
+            messageTrocos.setFont(new Font("Arial", Font.BOLD, 14));
+            messageTrocos.setForeground(Color.red);
+            
+            JOptionPane  optionpane = new JOptionPane(messageTrocos, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+            JDialog dialog = optionpane.createDialog(this, "Aviso");
+            return;  
         }
         
         ReservasDAO reservasDAO = new ReservasDAO();
