@@ -24,19 +24,19 @@ public class RelatorioDAO {
         Connection con = ConexaoBD.conectar();
 
         try {
+            
+            relatorio.append("=========================R E L A T O R I O=========================\n");
+            relatorio.append("===================================================================\n");
+
+
+            
             // Quantidade de funcionários
             String sqlFuncionarios = "SELECT COUNT(*) AS total FROM users";
             PreparedStatement pstFuncionarios = con.prepareStatement(sqlFuncionarios);
             ResultSet rsFuncionarios = pstFuncionarios.executeQuery();
-            
-            relatorio.append(".............R E L A T O R I O...............");
-            relatorio.append(" ");
-            
             if (rsFuncionarios.next()) {
                 relatorio.append("Total de Funcionários: ").append(rsFuncionarios.getInt("total")).append("\n");
             }
-            
-         //   relatorio.append("=========================================");
 
             // Quantidade de cada cargo
             String sqlCargos = "SELECT cargo, COUNT(*) AS total FROM users GROUP BY cargo";
@@ -46,8 +46,6 @@ public class RelatorioDAO {
             while (rsCargos.next()) {
                 relatorio.append("  ").append(rsCargos.getString("cargo")).append(": ").append(rsCargos.getInt("total")).append("\n");
             }
-            
-            relatorio.append("------------------------------------------.");
 
           /*  // Quantidade de cada sexo
             String sqlSexo = "SELECT sexo, COUNT(*) AS total FROM users GROUP BY sexo";
@@ -59,9 +57,6 @@ public class RelatorioDAO {
             } */
 
             // Quantidade de viagens
-            
-            relatorio.append(" ");
-            
             String sqlViagens = "SELECT COUNT(*) AS total FROM viagens";
             PreparedStatement pstViagens = con.prepareStatement(sqlViagens);
             ResultSet rsViagens = pstViagens.executeQuery();
@@ -86,9 +81,8 @@ public class RelatorioDAO {
             }
 
             
-            relatorio.append("...............................................");
-            relatorio.append("...............................................");
-            relatorio.append("...............................................");
+            relatorio.append("===================================================================\n");
+            relatorio.append("===================================================================\n");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

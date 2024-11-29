@@ -216,7 +216,8 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-            EmailValidator emailValidator = new EmailValidator();
+
+        EmailValidator emailValidator = new EmailValidator();
                 String email = txtEmail.getText();
                 boolean isValid = emailValidator.isEmailValid(email);
                 

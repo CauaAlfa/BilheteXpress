@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.NameFilter;
 import java.sql.*;
 import DAO.AutocarrosDAO;
 import DAO.RelatorioDAO;
@@ -23,6 +24,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -33,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -1292,7 +1296,7 @@ public class TelaAdmin extends javax.swing.JFrame {
         model.setRowCount(0);  // Limpa a tabela antes de inserir novos dados
 
         try {
-            String query = "SELECT * FROM users WHERE apelido LIKE ? OR nome LIKE ? OR email LIKE ? OR cargo LIKE ?";
+            String query = "SELECT * FROM users WHERE (apelido LIKE ? OR nome LIKE ? OR email LIKE ? OR cargo LIKE ?) AND isDelete = false";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, "%" + keyword + "%");
             pst.setString(2, "%" + keyword + "%");
@@ -1492,7 +1496,9 @@ public class TelaAdmin extends javax.swing.JFrame {
             data.isEmpty() || hora.isEmpty() || precoTexto.isEmpty()) {
             validarCamposVazios();
             return;  
-        }
+        } else if (!validarMatricula(autocarro)) {
+            JOptionPane.showMessageDialog(null, "Erro: Matrícula inválida. Formato permitido: 'ABC 123 MP' ou 'AB 123 MP'.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
 
         double preco = Double.parseDouble(precoTexto);
 
@@ -1519,7 +1525,17 @@ public class TelaAdmin extends javax.swing.JFrame {
         });
        // atualizarTabelaViagens();
     }//GEN-LAST:event_jButton7ActionPerformed
+    }
+    
+    private boolean validarMatricula(String matricula) {
+        String regex = "^[A-Z]{2,3} \\d{3} [A-Z]{2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(matricula);
+        return matcher.matches();
+    }
 
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int selectedRow = tabelaViagens.getSelectedRow();
         if (selectedRow != -1) {

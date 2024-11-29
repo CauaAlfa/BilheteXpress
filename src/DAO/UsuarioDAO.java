@@ -24,7 +24,7 @@ public class UsuarioDAO {
     public void cadastrarUsuario(String apelido, String nome, String email, String senha, String cargo) {
         Connection con = ConexaoBD.conectar();
         boolean status = true;  
-        boolean isDelete = true;
+        boolean isDelete = false;
         
         if (verificarEmailExistente(email, con)) {
             JOptionPane.showMessageDialog(null, "Erro: O email já está cadastrado.", "Erro", JOptionPane.ERROR_MESSAGE); return; 
@@ -95,7 +95,7 @@ public class UsuarioDAO {
         List<Usuario> usuarios = new ArrayList<>();
 
         try {
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM users");
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE isDelete = false");
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -160,7 +160,7 @@ public class UsuarioDAO {
     public boolean atualizarSenha(String email, String novaSenha) {
         Connection con = ConexaoBD.conectar();
         try {
-            String sql = "UPDATE Usuarios SET senha = ? WHERE email = ?";
+            String sql = "UPDATE users SET senha = ? WHERE email = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, novaSenha);
             pst.setString(2, email);
