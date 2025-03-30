@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Caua
@@ -11,14 +13,15 @@ package Model;
 public class Assento {
     private int numero;
     private boolean ocupado;
-    private Cliente cliente;
+    private ArrayList<Cliente> cliente;
 
-    public Assento(int numero, boolean ocupado, Cliente cliente) {
+    public Assento(int numero, boolean ocupado, ArrayList<Cliente> cliente) {
         this.numero = numero;
         this.ocupado = ocupado;
         this.cliente = cliente;
     }
 
+    
     public int getNumero() {
         return numero;
     }
@@ -35,13 +38,14 @@ public class Assento {
         this.ocupado = ocupado;
     }
 
-    public Cliente getCliente() {
+    public ArrayList<Cliente> getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(ArrayList<Cliente> cliente) {
         this.cliente = cliente;
     }
+
     
     
 }

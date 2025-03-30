@@ -4,31 +4,39 @@
  */
 package Model;
 
-import java.util.List;
-
 /**
  *
  * @author Caua
  */
-import java.util.List;
-
-public class Cliente {
+public class Reservas {
     private int id;
+    private String partida;
+    private String destino;
+    private String autocarro;
+    private String data;
+    private String hora;
+    private double preco;
     private String apelido;
     private String nome;
     private String email;
-    private String BI;  // Bilhete de Identidade
+    private String BI;
     private String telefone;
     private String telefoneEmergencia;
     private String sexo;
-    private List<Viagens> historicoViagens;
+    private boolean status;
 
     // Construtor padrão
-    public Cliente() {
+    public Reservas() {
     }
 
-    public Cliente(int id, String apelido, String nome, String email, String BI, String telefone, String telefoneEmergencia, String sexo, List<Viagens> historicoViagens) {
+    public Reservas(int id, String partida, String destino, String autocarro, String data, String hora, double preco, String apelido, String nome, String email, String BI, String telefone, String telefoneEmergencia, String sexo, boolean status) {
         this.id = id;
+        this.partida = partida;
+        this.destino = destino;
+        this.autocarro = autocarro;
+        this.data = data;
+        this.hora = hora;
+        this.preco = preco;
         this.apelido = apelido;
         this.nome = nome;
         this.email = email;
@@ -36,7 +44,7 @@ public class Cliente {
         this.telefone = telefone;
         this.telefoneEmergencia = telefoneEmergencia;
         this.sexo = sexo;
-        this.historicoViagens = historicoViagens;
+        this.status = status;
     }
 
     public int getId() {
@@ -45,6 +53,54 @@ public class Cliente {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPartida() {
+        return partida;
+    }
+
+    public void setPartida(String partida) {
+        this.partida = partida;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public String getAutocarro() {
+        return autocarro;
+    }
+
+    public void setAutocarro(String autocarro) {
+        this.autocarro = autocarro;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
     public String getApelido() {
@@ -103,11 +159,11 @@ public class Cliente {
         this.sexo = sexo;
     }
 
-    public List<Viagens> getHistoricoViagens() {
-        return historicoViagens;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setHistoricoViagens(List<Viagens> historicoViagens) {
-        this.historicoViagens = historicoViagens;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

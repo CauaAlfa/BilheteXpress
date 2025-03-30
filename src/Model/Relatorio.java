@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Caua
@@ -11,11 +13,11 @@ package Model;
 public class Relatorio {
     private int id;
     private String tipo;
-    private localDate dataInicio;
-    private localDate dataFim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private String dados;
 
-    public Relatorio(int id, String tipo, localDate dataInicio, localDate dataFim, String dados) {
+    public Relatorio(int id, String tipo, LocalDate dataInicio, LocalDate dataFim, String dados) {
         this.id = id;
         this.tipo = tipo;
         this.dataInicio = dataInicio;
@@ -39,19 +41,19 @@ public class Relatorio {
         this.tipo = tipo;
     }
 
-    public localDate getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(localDate dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public localDate getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(localDate dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
 
